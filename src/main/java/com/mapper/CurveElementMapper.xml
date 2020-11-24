@@ -1,0 +1,1257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.CurveElementMapper">
+  <resultMap id="BaseResultMap" type="com.model.CurveElement">
+    <id column="ce_ID" jdbcType="INTEGER" property="ceId" />
+    <result column="ce_JD" jdbcType="CHAR" property="ceJd" />
+    <result column="ce_DK" jdbcType="DOUBLE" property="ceDk" />
+    <result column="ce_EX" jdbcType="DOUBLE" property="ceEx" />
+    <result column="ce_NY" jdbcType="DOUBLE" property="ceNy" />
+    <result column="ce_T1" jdbcType="DOUBLE" property="ceT1" />
+    <result column="ce_T2" jdbcType="DOUBLE" property="ceT2" />
+    <result column="ce_R1" jdbcType="DOUBLE" property="ceR1" />
+    <result column="ce_R2" jdbcType="DOUBLE" property="ceR2" />
+    <result column="ce_Rc" jdbcType="DOUBLE" property="ceRc" />
+    <result column="ce_A1" jdbcType="DOUBLE" property="ceA1" />
+    <result column="ce_A2" jdbcType="DOUBLE" property="ceA2" />
+    <result column="ce_Ls1" jdbcType="DOUBLE" property="ceLs1" />
+    <result column="ce_Ls2" jdbcType="DOUBLE" property="ceLs2" />
+    <result column="ce_Lc" jdbcType="DOUBLE" property="ceLc" />
+    <result column="ce_Lz" jdbcType="DOUBLE" property="ceLz" />
+    <result column="ce_L" jdbcType="DOUBLE" property="ceL" />
+    <result column="ce_E" jdbcType="DOUBLE" property="ceE" />
+    <result column="ce_PJ" jdbcType="DOUBLE" property="cePj" />
+    <result column="ce_FWJ" jdbcType="DOUBLE" property="ceFwj" />
+    <result column="ce_QD" jdbcType="DOUBLE" property="ceQd" />
+    <result column="ce_ZH" jdbcType="DOUBLE" property="ceZh" />
+    <result column="ce_HY" jdbcType="DOUBLE" property="ceHy" />
+    <result column="ce_QZ" jdbcType="DOUBLE" property="ceQz" />
+    <result column="ce_YH" jdbcType="DOUBLE" property="ceYh" />
+    <result column="ce_HZ" jdbcType="DOUBLE" property="ceHz" />
+    <result column="ce_ZD" jdbcType="DOUBLE" property="ceZd" />
+    <result column="ce_QD_x" jdbcType="DOUBLE" property="ceQdX" />
+    <result column="ce_QD_y" jdbcType="DOUBLE" property="ceQdY" />
+    <result column="ce_ZH_x" jdbcType="DOUBLE" property="ceZhX" />
+    <result column="ce_ZH_y" jdbcType="DOUBLE" property="ceZhY" />
+    <result column="ce_HY_x" jdbcType="DOUBLE" property="ceHyX" />
+    <result column="ce_HY_y" jdbcType="DOUBLE" property="ceHyY" />
+    <result column="ce_QZ_x" jdbcType="DOUBLE" property="ceQzX" />
+    <result column="ce_QZ_y" jdbcType="DOUBLE" property="ceQzY" />
+    <result column="ce_YH_x" jdbcType="DOUBLE" property="ceYhX" />
+    <result column="ce_YH_y" jdbcType="DOUBLE" property="ceYhY" />
+    <result column="ce_HZ_x" jdbcType="DOUBLE" property="ceHzX" />
+    <result column="ce_HZ_y" jdbcType="DOUBLE" property="ceHzY" />
+    <result column="ce_ZD_x" jdbcType="DOUBLE" property="ceZdX" />
+    <result column="ce_ZD_y" jdbcType="DOUBLE" property="ceZdY" />
+    <result column="ce_QX" jdbcType="CHAR" property="ceQx" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Model_Where_Clause">
+    <where>
+      <if test="record.ceId != null">
+        ce_ID = #{record.ceId,jdbcType=INTEGER}
+      </if>
+      <if test="record.ceQx != null">
+        and ce_QX = #{record.ceQx,jdbcType=CHAR}
+      </if>
+      <if test="record.ceJd != null">
+        and ce_JD = #{record.ceJd,jdbcType=CHAR}
+      </if>
+      <if test="record.ceDk != null">
+        and ce_DK = #{record.ceDk,jdbcType=DOUBLE}
+      </if>
+      <if test="record.ceEx != null">
+        and ce_EX = #{record.ceEx,jdbcType=DOUBLE}
+      </if>
+      <if test="record.ceNy != null">
+        and ce_NY = #{record.ceNy,jdbcType=DOUBLE}
+      </if>
+      <if test="record.ceT1 != null">
+        and ce_T1 = #{record.ceT1,jdbcType=DOUBLE}
+      </if>
+      <if test="record.ceT2 != null">
+        and ce_T2 = #{record.ceT2,jdbcType=DOUBLE}
+      </if>
+      <if test="record.ceR1 != null">
+        and ce_R1 = #{record.ceR1,jdbcType=DOUBLE}
+      </if>
+      <if test="record.ceR2 != null">
+        and ce_R2 = #{record.ceR2,jdbcType=DOUBLE}
+      </if>
+      <if test="record.ceRc != null">
+        and ce_Rc = #{record.ceRc,jdbcType=DOUBLE}
+      </if>
+      <if test="record.ceA1 != null">
+        and ce_A1 = #{record.ceA1,jdbcType=DOUBLE}
+      </if>
+      <if test="record.ceA2 != null">
+        and ce_A2 = #{record.ceA2,jdbcType=DOUBLE}
+      </if>
+      <if test="record.ceLs1 != null">
+        and ce_Ls1 = #{record.ceLs1,jdbcType=DOUBLE}
+      </if>
+      <if test="record.ceLs2 != null">
+        and ce_Ls2 = #{record.ceLs2,jdbcType=DOUBLE}
+      </if>
+      <if test="record.ceLc != null">
+        and ce_Lc = #{record.ceLc,jdbcType=DOUBLE}
+      </if>
+      <if test="record.ceLz != null">
+        and ce_Lz = #{record.ceLz,jdbcType=DOUBLE}
+      </if>
+      <if test="record.ceL != null">
+        and ce_L = #{record.ceL,jdbcType=DOUBLE}
+      </if>
+      <if test="record.ceE != null">
+        and ce_E = #{record.ceE,jdbcType=DOUBLE}
+      </if>
+      <if test="record.cePj != null">
+        and ce_PJ = #{record.cePj,jdbcType=DOUBLE}
+      </if>
+      <if test="record.ceFwj != null">
+        and ce_FWJ = #{record.ceFwj,jdbcType=DOUBLE}
+      </if>
+      <if test="record.ceQd != null">
+        and ce_QD = #{record.ceQd,jdbcType=DOUBLE}
+      </if>
+      <if test="record.ceZh != null">
+        and ce_ZH = #{record.ceZh,jdbcType=DOUBLE}
+      </if>
+      <if test="record.ceHy != null">
+        and ce_HY = #{record.ceHy,jdbcType=DOUBLE}
+      </if>
+      <if test="record.ceQz != null">
+        and ce_QZ = #{record.ceQz,jdbcType=DOUBLE}
+      </if>
+      <if test="record.ceYh != null">
+        and ce_YH = #{record.ceYh,jdbcType=DOUBLE}
+      </if>
+      <if test="record.ceHz != null">
+        and ce_HZ = #{record.ceHz,jdbcType=DOUBLE}
+      </if>
+      <if test="record.ceZd != null">
+        and ce_ZD = #{record.ceZd,jdbcType=DOUBLE}
+      </if>
+      <if test="record.ceQdX != null">
+        and ce_QD_x = #{record.ceQdX,jdbcType=DOUBLE}
+      </if>
+      <if test="record.ceQdY != null">
+        and ce_QD_y = #{record.ceQdY,jdbcType=DOUBLE}
+      </if>
+      <if test="record.ceZhX != null">
+        and ce_ZH_x = #{record.ceZhX,jdbcType=DOUBLE}
+      </if>
+      <if test="record.ceZhY != null">
+        and ce_ZH_y = #{record.ceZhY,jdbcType=DOUBLE}
+      </if>
+      <if test="record.ceHyX != null">
+        and ce_HY_x = #{record.ceHyX,jdbcType=DOUBLE}
+      </if>
+      <if test="record.ceHyY != null">
+        and ce_HY_y = #{record.ceHyY,jdbcType=DOUBLE}
+      </if>
+      <if test="record.ceQzX != null">
+        and ce_QZ_x = #{record.ceQzX,jdbcType=DOUBLE}
+      </if>
+      <if test="record.ceQzY != null">
+        and ce_QZ_y = #{record.ceQzY,jdbcType=DOUBLE}
+      </if>
+      <if test="record.ceYhX != null">
+        and ce_YH_x = #{record.ceYhX,jdbcType=DOUBLE}
+      </if>
+      <if test="record.ceYhY != null">
+        and ce_YH_y = #{record.ceYhY,jdbcType=DOUBLE}
+      </if>
+      <if test="record.ceHzX != null">
+        and ce_HZ_x = #{record.ceHzX,jdbcType=DOUBLE}
+      </if>
+      <if test="record.ceHzY != null">
+        and ce_HZ_y = #{record.ceHzY,jdbcType=DOUBLE}
+      </if>
+      <if test="record.ceZdX != null">
+        and ce_ZD_x = #{record.ceZdX,jdbcType=DOUBLE}
+      </if>
+      <if test="record.ceZdY != null">
+        and ce_ZD_y = #{record.ceZdY,jdbcType=DOUBLE}
+      </if>
+    </where>
+    <include refid="Model_Clause_Offset" />
+  </sql>
+  <sql id="Model_Query_Clause">
+    <where>
+      <if test="record.ceId != null">
+        ce_ID like concat('%', #{record.ceId,jdbcType=INTEGER}, '%')
+      </if>
+      <if test="record.ceQx != null">
+        and ce_QX like concat('%', #{record.ceQx,jdbcType=CHAR}, '%')
+      </if>
+      <if test="record.ceJd != null">
+        and ce_JD like concat('%', #{record.ceJd,jdbcType=CHAR}, '%')
+      </if>
+      <if test="record.ceDk != null">
+        and ce_DK like concat('%', #{record.ceDk,jdbcType=DOUBLE}, '%')
+      </if>
+      <if test="record.ceEx != null">
+        and ce_EX like concat('%', #{record.ceEx,jdbcType=DOUBLE}, '%')
+      </if>
+      <if test="record.ceNy != null">
+        and ce_NY like concat('%', #{record.ceNy,jdbcType=DOUBLE}, '%')
+      </if>
+      <if test="record.ceT1 != null">
+        and ce_T1 like concat('%', #{record.ceT1,jdbcType=DOUBLE}, '%')
+      </if>
+      <if test="record.ceT2 != null">
+        and ce_T2 like concat('%', #{record.ceT2,jdbcType=DOUBLE}, '%')
+      </if>
+      <if test="record.ceR1 != null">
+        and ce_R1 like concat('%', #{record.ceR1,jdbcType=DOUBLE}, '%')
+      </if>
+      <if test="record.ceR2 != null">
+        and ce_R2 like concat('%', #{record.ceR2,jdbcType=DOUBLE}, '%')
+      </if>
+      <if test="record.ceRc != null">
+        and ce_Rc like concat('%', #{record.ceRc,jdbcType=DOUBLE}, '%')
+      </if>
+      <if test="record.ceA1 != null">
+        and ce_A1 like concat('%', #{record.ceA1,jdbcType=DOUBLE}, '%')
+      </if>
+      <if test="record.ceA2 != null">
+        and ce_A2 like concat('%', #{record.ceA2,jdbcType=DOUBLE}, '%')
+      </if>
+      <if test="record.ceLs1 != null">
+        and ce_Ls1 like concat('%', #{record.ceLs1,jdbcType=DOUBLE}, '%')
+      </if>
+      <if test="record.ceLs2 != null">
+        and ce_Ls2 like concat('%', #{record.ceLs2,jdbcType=DOUBLE}, '%')
+      </if>
+      <if test="record.ceLc != null">
+        and ce_Lc like concat('%', #{record.ceLc,jdbcType=DOUBLE}, '%')
+      </if>
+      <if test="record.ceLz != null">
+        and ce_Lz like concat('%', #{record.ceLz,jdbcType=DOUBLE}, '%')
+      </if>
+      <if test="record.ceL != null">
+        and ce_L like concat('%', #{record.ceL,jdbcType=DOUBLE}, '%')
+      </if>
+      <if test="record.ceE != null">
+        and ce_E like concat('%', #{record.ceE,jdbcType=DOUBLE}, '%')
+      </if>
+      <if test="record.cePj != null">
+        and ce_PJ like concat('%', #{record.cePj,jdbcType=DOUBLE}, '%')
+      </if>
+      <if test="record.ceFwj != null">
+        and ce_FWJ like concat('%', #{record.ceFwj,jdbcType=DOUBLE}, '%')
+      </if>
+      <if test="record.ceQd != null">
+        and ce_QD like concat('%', #{record.ceQd,jdbcType=DOUBLE}, '%')
+      </if>
+      <if test="record.ceZh != null">
+        and ce_ZH like concat('%', #{record.ceZh,jdbcType=DOUBLE}, '%')
+      </if>
+      <if test="record.ceHy != null">
+        and ce_HY like concat('%', #{record.ceHy,jdbcType=DOUBLE}, '%')
+      </if>
+      <if test="record.ceQz != null">
+        and ce_QZ like concat('%', #{record.ceQz,jdbcType=DOUBLE}, '%')
+      </if>
+      <if test="record.ceYh != null">
+        and ce_YH like concat('%', #{record.ceYh,jdbcType=DOUBLE}, '%')
+      </if>
+      <if test="record.ceHz != null">
+        and ce_HZ like concat('%', #{record.ceHz,jdbcType=DOUBLE}, '%')
+      </if>
+      <if test="record.ceZd != null">
+        and ce_ZD like concat('%', #{record.ceZd,jdbcType=DOUBLE}, '%')
+      </if>
+      <if test="record.ceQdX != null">
+        and ce_QD_x like concat('%', #{record.ceQdX,jdbcType=DOUBLE}, '%')
+      </if>
+      <if test="record.ceQdY != null">
+        and ce_QD_y like concat('%', #{record.ceQdY,jdbcType=DOUBLE}, '%')
+      </if>
+      <if test="record.ceZhX != null">
+        and ce_ZH_x like concat('%', #{record.ceZhX,jdbcType=DOUBLE}, '%')
+      </if>
+      <if test="record.ceZhY != null">
+        and ce_ZH_y like concat('%', #{record.ceZhY,jdbcType=DOUBLE}, '%')
+      </if>
+      <if test="record.ceHyX != null">
+        and ce_HY_x like concat('%', #{record.ceHyX,jdbcType=DOUBLE}, '%')
+      </if>
+      <if test="record.ceHyY != null">
+        and ce_HY_y like concat('%', #{record.ceHyY,jdbcType=DOUBLE}, '%')
+      </if>
+      <if test="record.ceQzX != null">
+        and ce_QZ_x like concat('%', #{record.ceQzX,jdbcType=DOUBLE}, '%')
+      </if>
+      <if test="record.ceQzY != null">
+        and ce_QZ_y like concat('%', #{record.ceQzY,jdbcType=DOUBLE}, '%')
+      </if>
+      <if test="record.ceYhX != null">
+        and ce_YH_x like concat('%', #{record.ceYhX,jdbcType=DOUBLE}, '%')
+      </if>
+      <if test="record.ceYhY != null">
+        and ce_YH_y like concat('%', #{record.ceYhY,jdbcType=DOUBLE}, '%')
+      </if>
+      <if test="record.ceHzX != null">
+        and ce_HZ_x like concat('%', #{record.ceHzX,jdbcType=DOUBLE}, '%')
+      </if>
+      <if test="record.ceHzY != null">
+        and ce_HZ_y like concat('%', #{record.ceHzY,jdbcType=DOUBLE}, '%')
+      </if>
+      <if test="record.ceZdX != null">
+        and ce_ZD_x like concat('%', #{record.ceZdX,jdbcType=DOUBLE}, '%')
+      </if>
+      <if test="record.ceZdY != null">
+        and ce_ZD_y like concat('%', #{record.ceZdY,jdbcType=DOUBLE}, '%')
+      </if>
+    </where>
+    <include refid="Model_Clause_Offset" />
+  </sql>
+  <sql id="Model_Clause_Offset">
+    <if test="_parameter != null">
+      <if test="_parameter.containsKey('limit') and limit != null">
+        <choose>
+          <when test="_parameter.containsKey('offset') and offset != null">
+            order by ce_ID asc limit #{offset}, #{limit};
+          </when>
+          <otherwise>
+            order by ce_ID asc limit  #{limit};
+          </otherwise>
+        </choose>
+      </if>
+    </if>
+  </sql>
+  <sql id="Model_Clause_Order">
+    <if test="_parameter != null">
+      <choose>
+        <when test="_parameter.containsKey('field') and field != null">
+          order by ${field} asc;
+        </when>
+        <otherwise>
+          order by ce_ID asc;
+        </otherwise>
+      </choose>
+    </if>
+  </sql>
+  <sql id="Base_Column_List">
+    ce_ID, ce_JD, ce_DK, ce_EX, ce_NY, ce_T1, ce_T2, ce_R1, ce_R2, ce_Rc, ce_A1, ce_A2, 
+    ce_Ls1, ce_Ls2, ce_Lc, ce_Lz, ce_L, ce_E, ce_PJ, ce_FWJ, ce_QD, ce_ZH, ce_HY, ce_QZ, 
+    ce_YH, ce_HZ, ce_ZD, ce_QD_x, ce_QD_y, ce_ZH_x, ce_ZH_y, ce_HY_x, ce_HY_y, ce_QZ_x, 
+    ce_QZ_y, ce_YH_x, ce_YH_y, ce_HZ_x, ce_HZ_y, ce_ZD_x, ce_ZD_y, ce_QX
+  </sql>
+  <sql id="Param_Column_List">
+    <choose>
+      <when test="_parameter != null">
+        <if test="_parameter.containsKey('fields') and fields != null">
+          ${fields}
+        </if>
+      </when>
+      <otherwise>
+        <include refid="Base_Column_List" />
+      </otherwise>
+    </choose>
+  </sql>
+  <sql id="Param_Where_Clause_Like">
+    <if test="_parameter != null">
+      <if test="_parameter.containsKey('field') and field != null">
+        <where>
+          <if test="_parameter.containsKey('value') and value != null">
+            ${field} like concat('%', #{value}, '%')
+          </if>
+        </where>
+        <if test="_parameter.containsKey('limit') and limit != null">
+          <choose>
+            <when test="_parameter.containsKey('offset') and offset != null">
+              order by ${field} asc limit #{offset}, #{limit};
+            </when>
+            <otherwise>
+              order by ${field} asc limit  #{limit};
+            </otherwise>
+          </choose>
+        </if>
+      </if>
+    </if>
+  </sql>
+  <sql id="Param_Where_Clause_Equal">
+    <if test="_parameter != null">
+      <if test="_parameter.containsKey('field') and field != null">
+        <where>
+          <if test="_parameter.containsKey('value') and value != null">
+            ${field} = #{value}
+          </if>
+          <if test="_parameter.containsKey('value1') and _parameter.containsKey('value2')">
+            <if test="value1 != null and value2 != null">
+              ${field} between #{value1} and #{value2}
+            </if>
+          </if>
+        </where>
+        <if test="_parameter.containsKey('limit') and limit != null">
+          <choose>
+            <when test="_parameter.containsKey('offset') and offset != null">
+              order by ${field} asc limit #{offset}, #{limit};
+            </when>
+            <otherwise>
+              order by ${field} asc limit  #{limit};
+            </otherwise>
+          </choose>
+        </if>
+      </if>
+    </if>
+  </sql>
+  <sql id="Param_Where_Clause_Sql">
+    <where>
+      <choose>
+        <when test="_parameter != null">
+          <if test="_parameter.containsKey('sql') and sql != null">
+            ${sql}
+          </if>
+        </when>
+        <otherwise>
+          ce_ID is null
+        </otherwise>
+      </choose>
+    </where>
+    <include refid="Model_Clause_Offset" />
+  </sql>
+  <select id="selectByExample" parameterType="com.model.CurveElementExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_curveelement
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_curveelement
+    where ce_ID = #{ceId,jdbcType=INTEGER}
+  </select>
+  <select id="selectByMinPrimaryKey" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from tb_curveelement
+    where ce_ID = (select min(ce_ID) from tb_curveelement)
+  </select>
+  <select id="selectByMaxPrimaryKey" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from tb_curveelement
+    where ce_ID = (select max(ce_ID) from tb_curveelement)
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tb_curveelement
+    where ce_ID = #{ceId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.model.CurveElementExample">
+    delete from tb_curveelement
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <delete id="deleteAllModel">
+    delete from tb_curveelement
+  </delete>
+  <insert id="insert" keyColumn="ce_ID" keyProperty="ceId" parameterType="com.model.CurveElement" useGeneratedKeys="true">
+    insert into tb_curveelement (ce_ID, ce_JD, ce_DK, ce_EX,
+      ce_NY, ce_T1, ce_T2, ce_R1, 
+      ce_R2, ce_Rc, ce_A1, ce_A2, 
+      ce_Ls1, ce_Ls2, ce_Lc, ce_Lz, 
+      ce_L, ce_E, ce_PJ, ce_FWJ, 
+      ce_QD, ce_ZH, ce_HY, ce_QZ, 
+      ce_YH, ce_HZ, ce_ZD, ce_QD_x, 
+      ce_QD_y, ce_ZH_x, ce_ZH_y, ce_HY_x, 
+      ce_HY_y, ce_QZ_x, ce_QZ_y, ce_YH_x, 
+      ce_YH_y, ce_HZ_x, ce_HZ_y, ce_ZD_x, 
+      ce_ZD_y, ce_QX)
+    values (#{ceId,jdbcType=INTEGER}, #{ceJd,jdbcType=CHAR}, #{ceDk,jdbcType=DOUBLE}, #{ceEx,jdbcType=DOUBLE},
+      #{ceNy,jdbcType=DOUBLE}, #{ceT1,jdbcType=DOUBLE}, #{ceT2,jdbcType=DOUBLE}, #{ceR1,jdbcType=DOUBLE}, 
+      #{ceR2,jdbcType=DOUBLE}, #{ceRc,jdbcType=DOUBLE}, #{ceA1,jdbcType=DOUBLE}, #{ceA2,jdbcType=DOUBLE}, 
+      #{ceLs1,jdbcType=DOUBLE}, #{ceLs2,jdbcType=DOUBLE}, #{ceLc,jdbcType=DOUBLE}, #{ceLz,jdbcType=DOUBLE}, 
+      #{ceL,jdbcType=DOUBLE}, #{ceE,jdbcType=DOUBLE}, #{cePj,jdbcType=DOUBLE}, #{ceFwj,jdbcType=DOUBLE}, 
+      #{ceQd,jdbcType=DOUBLE}, #{ceZh,jdbcType=DOUBLE}, #{ceHy,jdbcType=DOUBLE}, #{ceQz,jdbcType=DOUBLE}, 
+      #{ceYh,jdbcType=DOUBLE}, #{ceHz,jdbcType=DOUBLE}, #{ceZd,jdbcType=DOUBLE}, #{ceQdX,jdbcType=DOUBLE}, 
+      #{ceQdY,jdbcType=DOUBLE}, #{ceZhX,jdbcType=DOUBLE}, #{ceZhY,jdbcType=DOUBLE}, #{ceHyX,jdbcType=DOUBLE}, 
+      #{ceHyY,jdbcType=DOUBLE}, #{ceQzX,jdbcType=DOUBLE}, #{ceQzY,jdbcType=DOUBLE}, #{ceYhX,jdbcType=DOUBLE}, 
+      #{ceYhY,jdbcType=DOUBLE}, #{ceHzX,jdbcType=DOUBLE}, #{ceHzY,jdbcType=DOUBLE}, #{ceZdX,jdbcType=DOUBLE}, 
+      #{ceZdY,jdbcType=DOUBLE}, #{ceQx,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="ce_ID" keyProperty="ceId" parameterType="com.model.CurveElement" useGeneratedKeys="true">
+    insert into tb_curveelement
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ceId != null">
+        ce_ID,
+      </if>
+      <if test="ceJd != null">
+        ce_JD,
+      </if>
+      <if test="ceDk != null">
+        ce_DK,
+      </if>
+      <if test="ceEx != null">
+        ce_EX,
+      </if>
+      <if test="ceNy != null">
+        ce_NY,
+      </if>
+      <if test="ceT1 != null">
+        ce_T1,
+      </if>
+      <if test="ceT2 != null">
+        ce_T2,
+      </if>
+      <if test="ceR1 != null">
+        ce_R1,
+      </if>
+      <if test="ceR2 != null">
+        ce_R2,
+      </if>
+      <if test="ceRc != null">
+        ce_Rc,
+      </if>
+      <if test="ceA1 != null">
+        ce_A1,
+      </if>
+      <if test="ceA2 != null">
+        ce_A2,
+      </if>
+      <if test="ceLs1 != null">
+        ce_Ls1,
+      </if>
+      <if test="ceLs2 != null">
+        ce_Ls2,
+      </if>
+      <if test="ceLc != null">
+        ce_Lc,
+      </if>
+      <if test="ceLz != null">
+        ce_Lz,
+      </if>
+      <if test="ceL != null">
+        ce_L,
+      </if>
+      <if test="ceE != null">
+        ce_E,
+      </if>
+      <if test="cePj != null">
+        ce_PJ,
+      </if>
+      <if test="ceFwj != null">
+        ce_FWJ,
+      </if>
+      <if test="ceQd != null">
+        ce_QD,
+      </if>
+      <if test="ceZh != null">
+        ce_ZH,
+      </if>
+      <if test="ceHy != null">
+        ce_HY,
+      </if>
+      <if test="ceQz != null">
+        ce_QZ,
+      </if>
+      <if test="ceYh != null">
+        ce_YH,
+      </if>
+      <if test="ceHz != null">
+        ce_HZ,
+      </if>
+      <if test="ceZd != null">
+        ce_ZD,
+      </if>
+      <if test="ceQdX != null">
+        ce_QD_x,
+      </if>
+      <if test="ceQdY != null">
+        ce_QD_y,
+      </if>
+      <if test="ceZhX != null">
+        ce_ZH_x,
+      </if>
+      <if test="ceZhY != null">
+        ce_ZH_y,
+      </if>
+      <if test="ceHyX != null">
+        ce_HY_x,
+      </if>
+      <if test="ceHyY != null">
+        ce_HY_y,
+      </if>
+      <if test="ceQzX != null">
+        ce_QZ_x,
+      </if>
+      <if test="ceQzY != null">
+        ce_QZ_y,
+      </if>
+      <if test="ceYhX != null">
+        ce_YH_x,
+      </if>
+      <if test="ceYhY != null">
+        ce_YH_y,
+      </if>
+      <if test="ceHzX != null">
+        ce_HZ_x,
+      </if>
+      <if test="ceHzY != null">
+        ce_HZ_y,
+      </if>
+      <if test="ceZdX != null">
+        ce_ZD_x,
+      </if>
+      <if test="ceZdY != null">
+        ce_ZD_y,
+      </if>
+      <if test="ceQx != null">
+        ce_QX,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ceId != null">
+        #{ceId,jdbcType=INTEGER},
+      </if>
+      <if test="ceJd != null">
+        #{ceJd,jdbcType=CHAR},
+      </if>
+      <if test="ceDk != null">
+        #{ceDk,jdbcType=DOUBLE},
+      </if>
+      <if test="ceEx != null">
+        #{ceEx,jdbcType=DOUBLE},
+      </if>
+      <if test="ceNy != null">
+        #{ceNy,jdbcType=DOUBLE},
+      </if>
+      <if test="ceT1 != null">
+        #{ceT1,jdbcType=DOUBLE},
+      </if>
+      <if test="ceT2 != null">
+        #{ceT2,jdbcType=DOUBLE},
+      </if>
+      <if test="ceR1 != null">
+        #{ceR1,jdbcType=DOUBLE},
+      </if>
+      <if test="ceR2 != null">
+        #{ceR2,jdbcType=DOUBLE},
+      </if>
+      <if test="ceRc != null">
+        #{ceRc,jdbcType=DOUBLE},
+      </if>
+      <if test="ceA1 != null">
+        #{ceA1,jdbcType=DOUBLE},
+      </if>
+      <if test="ceA2 != null">
+        #{ceA2,jdbcType=DOUBLE},
+      </if>
+      <if test="ceLs1 != null">
+        #{ceLs1,jdbcType=DOUBLE},
+      </if>
+      <if test="ceLs2 != null">
+        #{ceLs2,jdbcType=DOUBLE},
+      </if>
+      <if test="ceLc != null">
+        #{ceLc,jdbcType=DOUBLE},
+      </if>
+      <if test="ceLz != null">
+        #{ceLz,jdbcType=DOUBLE},
+      </if>
+      <if test="ceL != null">
+        #{ceL,jdbcType=DOUBLE},
+      </if>
+      <if test="ceE != null">
+        #{ceE,jdbcType=DOUBLE},
+      </if>
+      <if test="cePj != null">
+        #{cePj,jdbcType=DOUBLE},
+      </if>
+      <if test="ceFwj != null">
+        #{ceFwj,jdbcType=DOUBLE},
+      </if>
+      <if test="ceQd != null">
+        #{ceQd,jdbcType=DOUBLE},
+      </if>
+      <if test="ceZh != null">
+        #{ceZh,jdbcType=DOUBLE},
+      </if>
+      <if test="ceHy != null">
+        #{ceHy,jdbcType=DOUBLE},
+      </if>
+      <if test="ceQz != null">
+        #{ceQz,jdbcType=DOUBLE},
+      </if>
+      <if test="ceYh != null">
+        #{ceYh,jdbcType=DOUBLE},
+      </if>
+      <if test="ceHz != null">
+        #{ceHz,jdbcType=DOUBLE},
+      </if>
+      <if test="ceZd != null">
+        #{ceZd,jdbcType=DOUBLE},
+      </if>
+      <if test="ceQdX != null">
+        #{ceQdX,jdbcType=DOUBLE},
+      </if>
+      <if test="ceQdY != null">
+        #{ceQdY,jdbcType=DOUBLE},
+      </if>
+      <if test="ceZhX != null">
+        #{ceZhX,jdbcType=DOUBLE},
+      </if>
+      <if test="ceZhY != null">
+        #{ceZhY,jdbcType=DOUBLE},
+      </if>
+      <if test="ceHyX != null">
+        #{ceHyX,jdbcType=DOUBLE},
+      </if>
+      <if test="ceHyY != null">
+        #{ceHyY,jdbcType=DOUBLE},
+      </if>
+      <if test="ceQzX != null">
+        #{ceQzX,jdbcType=DOUBLE},
+      </if>
+      <if test="ceQzY != null">
+        #{ceQzY,jdbcType=DOUBLE},
+      </if>
+      <if test="ceYhX != null">
+        #{ceYhX,jdbcType=DOUBLE},
+      </if>
+      <if test="ceYhY != null">
+        #{ceYhY,jdbcType=DOUBLE},
+      </if>
+      <if test="ceHzX != null">
+        #{ceHzX,jdbcType=DOUBLE},
+      </if>
+      <if test="ceHzY != null">
+        #{ceHzY,jdbcType=DOUBLE},
+      </if>
+      <if test="ceZdX != null">
+        #{ceZdX,jdbcType=DOUBLE},
+      </if>
+      <if test="ceZdY != null">
+        #{ceZdY,jdbcType=DOUBLE},
+      </if>
+      <if test="ceQx != null">
+        #{ceQx,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.model.CurveElementExample" resultType="java.lang.Long">
+    select count(*) from tb_curveelement
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tb_curveelement
+    <set>
+      <if test="record.ceId != null">
+        ce_ID = #{record.ceId,jdbcType=INTEGER},
+      </if>
+      <if test="record.ceJd != null">
+        ce_JD = #{record.ceJd,jdbcType=CHAR},
+      </if>
+      <if test="record.ceDk != null">
+        ce_DK = #{record.ceDk,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ceEx != null">
+        ce_EX = #{record.ceEx,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ceNy != null">
+        ce_NY = #{record.ceNy,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ceT1 != null">
+        ce_T1 = #{record.ceT1,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ceT2 != null">
+        ce_T2 = #{record.ceT2,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ceR1 != null">
+        ce_R1 = #{record.ceR1,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ceR2 != null">
+        ce_R2 = #{record.ceR2,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ceRc != null">
+        ce_Rc = #{record.ceRc,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ceA1 != null">
+        ce_A1 = #{record.ceA1,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ceA2 != null">
+        ce_A2 = #{record.ceA2,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ceLs1 != null">
+        ce_Ls1 = #{record.ceLs1,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ceLs2 != null">
+        ce_Ls2 = #{record.ceLs2,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ceLc != null">
+        ce_Lc = #{record.ceLc,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ceLz != null">
+        ce_Lz = #{record.ceLz,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ceL != null">
+        ce_L = #{record.ceL,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ceE != null">
+        ce_E = #{record.ceE,jdbcType=DOUBLE},
+      </if>
+      <if test="record.cePj != null">
+        ce_PJ = #{record.cePj,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ceFwj != null">
+        ce_FWJ = #{record.ceFwj,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ceQd != null">
+        ce_QD = #{record.ceQd,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ceZh != null">
+        ce_ZH = #{record.ceZh,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ceHy != null">
+        ce_HY = #{record.ceHy,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ceQz != null">
+        ce_QZ = #{record.ceQz,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ceYh != null">
+        ce_YH = #{record.ceYh,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ceHz != null">
+        ce_HZ = #{record.ceHz,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ceZd != null">
+        ce_ZD = #{record.ceZd,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ceQdX != null">
+        ce_QD_x = #{record.ceQdX,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ceQdY != null">
+        ce_QD_y = #{record.ceQdY,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ceZhX != null">
+        ce_ZH_x = #{record.ceZhX,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ceZhY != null">
+        ce_ZH_y = #{record.ceZhY,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ceHyX != null">
+        ce_HY_x = #{record.ceHyX,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ceHyY != null">
+        ce_HY_y = #{record.ceHyY,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ceQzX != null">
+        ce_QZ_x = #{record.ceQzX,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ceQzY != null">
+        ce_QZ_y = #{record.ceQzY,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ceYhX != null">
+        ce_YH_x = #{record.ceYhX,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ceYhY != null">
+        ce_YH_y = #{record.ceYhY,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ceHzX != null">
+        ce_HZ_x = #{record.ceHzX,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ceHzY != null">
+        ce_HZ_y = #{record.ceHzY,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ceZdX != null">
+        ce_ZD_x = #{record.ceZdX,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ceZdY != null">
+        ce_ZD_y = #{record.ceZdY,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ceQx != null">
+        ce_QX = #{record.ceQx,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tb_curveelement
+    set ce_ID = #{record.ceId,jdbcType=INTEGER},
+      ce_JD = #{record.ceJd,jdbcType=CHAR},
+      ce_DK = #{record.ceDk,jdbcType=DOUBLE},
+      ce_EX = #{record.ceEx,jdbcType=DOUBLE},
+      ce_NY = #{record.ceNy,jdbcType=DOUBLE},
+      ce_T1 = #{record.ceT1,jdbcType=DOUBLE},
+      ce_T2 = #{record.ceT2,jdbcType=DOUBLE},
+      ce_R1 = #{record.ceR1,jdbcType=DOUBLE},
+      ce_R2 = #{record.ceR2,jdbcType=DOUBLE},
+      ce_Rc = #{record.ceRc,jdbcType=DOUBLE},
+      ce_A1 = #{record.ceA1,jdbcType=DOUBLE},
+      ce_A2 = #{record.ceA2,jdbcType=DOUBLE},
+      ce_Ls1 = #{record.ceLs1,jdbcType=DOUBLE},
+      ce_Ls2 = #{record.ceLs2,jdbcType=DOUBLE},
+      ce_Lc = #{record.ceLc,jdbcType=DOUBLE},
+      ce_Lz = #{record.ceLz,jdbcType=DOUBLE},
+      ce_L = #{record.ceL,jdbcType=DOUBLE},
+      ce_E = #{record.ceE,jdbcType=DOUBLE},
+      ce_PJ = #{record.cePj,jdbcType=DOUBLE},
+      ce_FWJ = #{record.ceFwj,jdbcType=DOUBLE},
+      ce_QD = #{record.ceQd,jdbcType=DOUBLE},
+      ce_ZH = #{record.ceZh,jdbcType=DOUBLE},
+      ce_HY = #{record.ceHy,jdbcType=DOUBLE},
+      ce_QZ = #{record.ceQz,jdbcType=DOUBLE},
+      ce_YH = #{record.ceYh,jdbcType=DOUBLE},
+      ce_HZ = #{record.ceHz,jdbcType=DOUBLE},
+      ce_ZD = #{record.ceZd,jdbcType=DOUBLE},
+      ce_QD_x = #{record.ceQdX,jdbcType=DOUBLE},
+      ce_QD_y = #{record.ceQdY,jdbcType=DOUBLE},
+      ce_ZH_x = #{record.ceZhX,jdbcType=DOUBLE},
+      ce_ZH_y = #{record.ceZhY,jdbcType=DOUBLE},
+      ce_HY_x = #{record.ceHyX,jdbcType=DOUBLE},
+      ce_HY_y = #{record.ceHyY,jdbcType=DOUBLE},
+      ce_QZ_x = #{record.ceQzX,jdbcType=DOUBLE},
+      ce_QZ_y = #{record.ceQzY,jdbcType=DOUBLE},
+      ce_YH_x = #{record.ceYhX,jdbcType=DOUBLE},
+      ce_YH_y = #{record.ceYhY,jdbcType=DOUBLE},
+      ce_HZ_x = #{record.ceHzX,jdbcType=DOUBLE},
+      ce_HZ_y = #{record.ceHzY,jdbcType=DOUBLE},
+      ce_ZD_x = #{record.ceZdX,jdbcType=DOUBLE},
+      ce_ZD_y = #{record.ceZdY,jdbcType=DOUBLE},
+      ce_QX = #{record.ceQx,jdbcType=CHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.model.CurveElement">
+    update tb_curveelement
+    <set>
+      <if test="ceJd != null">
+        ce_JD = #{ceJd,jdbcType=CHAR},
+      </if>
+      <if test="ceDk != null">
+        ce_DK = #{ceDk,jdbcType=DOUBLE},
+      </if>
+      <if test="ceEx != null">
+        ce_EX = #{ceEx,jdbcType=DOUBLE},
+      </if>
+      <if test="ceNy != null">
+        ce_NY = #{ceNy,jdbcType=DOUBLE},
+      </if>
+      <if test="ceT1 != null">
+        ce_T1 = #{ceT1,jdbcType=DOUBLE},
+      </if>
+      <if test="ceT2 != null">
+        ce_T2 = #{ceT2,jdbcType=DOUBLE},
+      </if>
+      <if test="ceR1 != null">
+        ce_R1 = #{ceR1,jdbcType=DOUBLE},
+      </if>
+      <if test="ceR2 != null">
+        ce_R2 = #{ceR2,jdbcType=DOUBLE},
+      </if>
+      <if test="ceRc != null">
+        ce_Rc = #{ceRc,jdbcType=DOUBLE},
+      </if>
+      <if test="ceA1 != null">
+        ce_A1 = #{ceA1,jdbcType=DOUBLE},
+      </if>
+      <if test="ceA2 != null">
+        ce_A2 = #{ceA2,jdbcType=DOUBLE},
+      </if>
+      <if test="ceLs1 != null">
+        ce_Ls1 = #{ceLs1,jdbcType=DOUBLE},
+      </if>
+      <if test="ceLs2 != null">
+        ce_Ls2 = #{ceLs2,jdbcType=DOUBLE},
+      </if>
+      <if test="ceLc != null">
+        ce_Lc = #{ceLc,jdbcType=DOUBLE},
+      </if>
+      <if test="ceLz != null">
+        ce_Lz = #{ceLz,jdbcType=DOUBLE},
+      </if>
+      <if test="ceL != null">
+        ce_L = #{ceL,jdbcType=DOUBLE},
+      </if>
+      <if test="ceE != null">
+        ce_E = #{ceE,jdbcType=DOUBLE},
+      </if>
+      <if test="cePj != null">
+        ce_PJ = #{cePj,jdbcType=DOUBLE},
+      </if>
+      <if test="ceFwj != null">
+        ce_FWJ = #{ceFwj,jdbcType=DOUBLE},
+      </if>
+      <if test="ceQd != null">
+        ce_QD = #{ceQd,jdbcType=DOUBLE},
+      </if>
+      <if test="ceZh != null">
+        ce_ZH = #{ceZh,jdbcType=DOUBLE},
+      </if>
+      <if test="ceHy != null">
+        ce_HY = #{ceHy,jdbcType=DOUBLE},
+      </if>
+      <if test="ceQz != null">
+        ce_QZ = #{ceQz,jdbcType=DOUBLE},
+      </if>
+      <if test="ceYh != null">
+        ce_YH = #{ceYh,jdbcType=DOUBLE},
+      </if>
+      <if test="ceHz != null">
+        ce_HZ = #{ceHz,jdbcType=DOUBLE},
+      </if>
+      <if test="ceZd != null">
+        ce_ZD = #{ceZd,jdbcType=DOUBLE},
+      </if>
+      <if test="ceQdX != null">
+        ce_QD_x = #{ceQdX,jdbcType=DOUBLE},
+      </if>
+      <if test="ceQdY != null">
+        ce_QD_y = #{ceQdY,jdbcType=DOUBLE},
+      </if>
+      <if test="ceZhX != null">
+        ce_ZH_x = #{ceZhX,jdbcType=DOUBLE},
+      </if>
+      <if test="ceZhY != null">
+        ce_ZH_y = #{ceZhY,jdbcType=DOUBLE},
+      </if>
+      <if test="ceHyX != null">
+        ce_HY_x = #{ceHyX,jdbcType=DOUBLE},
+      </if>
+      <if test="ceHyY != null">
+        ce_HY_y = #{ceHyY,jdbcType=DOUBLE},
+      </if>
+      <if test="ceQzX != null">
+        ce_QZ_x = #{ceQzX,jdbcType=DOUBLE},
+      </if>
+      <if test="ceQzY != null">
+        ce_QZ_y = #{ceQzY,jdbcType=DOUBLE},
+      </if>
+      <if test="ceYhX != null">
+        ce_YH_x = #{ceYhX,jdbcType=DOUBLE},
+      </if>
+      <if test="ceYhY != null">
+        ce_YH_y = #{ceYhY,jdbcType=DOUBLE},
+      </if>
+      <if test="ceHzX != null">
+        ce_HZ_x = #{ceHzX,jdbcType=DOUBLE},
+      </if>
+      <if test="ceHzY != null">
+        ce_HZ_y = #{ceHzY,jdbcType=DOUBLE},
+      </if>
+      <if test="ceZdX != null">
+        ce_ZD_x = #{ceZdX,jdbcType=DOUBLE},
+      </if>
+      <if test="ceZdY != null">
+        ce_ZD_y = #{ceZdY,jdbcType=DOUBLE},
+      </if>
+      <if test="ceQx != null">
+        ce_QX = #{ceQx,jdbcType=CHAR},
+      </if>
+    </set>
+    where ce_ID = #{ceId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.model.CurveElement">
+    update tb_curveelement
+    set ce_JD = #{ceJd,jdbcType=CHAR},
+      ce_DK = #{ceDk,jdbcType=DOUBLE},
+      ce_EX = #{ceEx,jdbcType=DOUBLE},
+      ce_NY = #{ceNy,jdbcType=DOUBLE},
+      ce_T1 = #{ceT1,jdbcType=DOUBLE},
+      ce_T2 = #{ceT2,jdbcType=DOUBLE},
+      ce_R1 = #{ceR1,jdbcType=DOUBLE},
+      ce_R2 = #{ceR2,jdbcType=DOUBLE},
+      ce_Rc = #{ceRc,jdbcType=DOUBLE},
+      ce_A1 = #{ceA1,jdbcType=DOUBLE},
+      ce_A2 = #{ceA2,jdbcType=DOUBLE},
+      ce_Ls1 = #{ceLs1,jdbcType=DOUBLE},
+      ce_Ls2 = #{ceLs2,jdbcType=DOUBLE},
+      ce_Lc = #{ceLc,jdbcType=DOUBLE},
+      ce_Lz = #{ceLz,jdbcType=DOUBLE},
+      ce_L = #{ceL,jdbcType=DOUBLE},
+      ce_E = #{ceE,jdbcType=DOUBLE},
+      ce_PJ = #{cePj,jdbcType=DOUBLE},
+      ce_FWJ = #{ceFwj,jdbcType=DOUBLE},
+      ce_QD = #{ceQd,jdbcType=DOUBLE},
+      ce_ZH = #{ceZh,jdbcType=DOUBLE},
+      ce_HY = #{ceHy,jdbcType=DOUBLE},
+      ce_QZ = #{ceQz,jdbcType=DOUBLE},
+      ce_YH = #{ceYh,jdbcType=DOUBLE},
+      ce_HZ = #{ceHz,jdbcType=DOUBLE},
+      ce_ZD = #{ceZd,jdbcType=DOUBLE},
+      ce_QD_x = #{ceQdX,jdbcType=DOUBLE},
+      ce_QD_y = #{ceQdY,jdbcType=DOUBLE},
+      ce_ZH_x = #{ceZhX,jdbcType=DOUBLE},
+      ce_ZH_y = #{ceZhY,jdbcType=DOUBLE},
+      ce_HY_x = #{ceHyX,jdbcType=DOUBLE},
+      ce_HY_y = #{ceHyY,jdbcType=DOUBLE},
+      ce_QZ_x = #{ceQzX,jdbcType=DOUBLE},
+      ce_QZ_y = #{ceQzY,jdbcType=DOUBLE},
+      ce_YH_x = #{ceYhX,jdbcType=DOUBLE},
+      ce_YH_y = #{ceYhY,jdbcType=DOUBLE},
+      ce_HZ_x = #{ceHzX,jdbcType=DOUBLE},
+      ce_HZ_y = #{ceHzY,jdbcType=DOUBLE},
+      ce_ZD_x = #{ceZdX,jdbcType=DOUBLE},
+      ce_ZD_y = #{ceZdY,jdbcType=DOUBLE},
+      ce_QX = #{ceQx,jdbcType=CHAR}
+    where ce_ID = #{ceId,jdbcType=INTEGER}
+  </update>
+  <select id="selectAllModel" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from tb_curveelement
+    <include refid="Model_Clause_Offset" />
+  </select>
+  <select id="countAllModel" resultType="java.lang.Long">
+    select count(*) from tb_curveelement
+  </select>
+  <select id="selectByParam" parameterType="map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from tb_curveelement
+    <include refid="Model_Where_Clause" />
+  </select>
+  <select id="countBySelectParam" parameterType="map" resultType="java.lang.Long">
+    select count(*) from tb_curveelement
+    <include refid="Model_Where_Clause" />
+  </select>
+  <select id="queryByParam" parameterType="map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from tb_curveelement
+    <include refid="Model_Query_Clause" />
+  </select>
+  <select id="countByQueryParam" parameterType="map" resultType="java.lang.Long">
+    select count(*) from tb_curveelement
+    <include refid="Model_Query_Clause" />
+  </select>
+  <select id="selectByCondition" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from tb_curveelement
+    <include refid="Param_Where_Clause_Equal" />
+  </select>
+  <select id="countBySelectCondition" resultType="java.lang.Long">
+    select count(*) from tb_curveelement
+    <include refid="Param_Where_Clause_Equal" />
+  </select>
+  <select id="queryByCondition" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from tb_curveelement
+    <include refid="Param_Where_Clause_Like" />
+  </select>
+  <select id="countByQueryCondition" resultType="java.lang.Long">
+    select count(*) from tb_curveelement
+    <include refid="Param_Where_Clause_Like" />
+  </select>
+  <select id="selectFieldsByParam" parameterType="map" resultMap="BaseResultMap">
+    select
+    <include refid="Param_Column_List" />
+    from tb_curveelement
+    <include refid="Model_Where_Clause" />
+  </select>
+  <select id="queryFieldsByParam" parameterType="map" resultMap="BaseResultMap">
+    select
+    <include refid="Param_Column_List" />
+    from tb_curveelement
+    <include refid="Model_Query_Clause" />
+  </select>
+  <select id="selectFieldsByCondition" resultMap="BaseResultMap">
+    select
+    <include refid="Param_Column_List" />
+    from tb_curveelement
+    <include refid="Param_Where_Clause_Equal" />
+  </select>
+  <select id="queryFieldsByCondition" resultMap="BaseResultMap">
+    select
+    <include refid="Param_Column_List" />
+    from tb_curveelement
+    <include refid="Param_Where_Clause_Like" />
+  </select>
+  <select id="selectBySql" resultMap="BaseResultMap" statementType="STATEMENT">
+    select
+    <include refid="Base_Column_List" />
+    from tb_curveelement
+    <include refid="Param_Where_Clause_Sql" />
+  </select>
+  <select id="selectFieldsBySql" resultMap="BaseResultMap" statementType="STATEMENT">
+    select
+    <include refid="Param_Column_List" />
+    from tb_curveelement
+    <include refid="Param_Where_Clause_Sql" />
+  </select>
+</mapper>

@@ -1,0 +1,44 @@
+[{
+  "id": 0,
+  "axis": 1,
+  "date": "2020/7/2",
+  "title": "2020年7月2日",
+  "contents": ["小横溪双线大桥正式开工了，现场1个土方队进行场地平整，现场配置2台360旋挖钻进行桩基施工。",
+    "<br>桩基施工准备条件今天务必全部具备！"],
+  "items": [],
+  "block": "",
+  "submit": false,
+  "tag": ["#id0","name","unit","quantity","info"]
+},{
+  "id": 1,
+  "axis": 0,
+  "date": "2020/7/3",
+  "title": "2020年7月3日",
+  "contents": ["正式开工第二天<em>桩基施工</em>，2020-7-3 8:00 该桥0#台0#-1桩开始施工"],
+  "items": ["1、泥浆池就绪",
+    "2、钢护筒到位",
+    "3、桩位放样完毕"],
+  "block": "",
+  "submit": false,
+  "tag": ["#id1","name","unit","quantity","info"]
+},{
+  "id": 2,
+  "axis": -1,
+  "date": "2020/7/4",
+  "title": "2020年7月4日",
+  "contents": ["旋挖钻经过1天的试桩磨合，验证了该桥地质参数和桩机选型，并在试桩过程确定了不同地质钻进参数"],
+  "items": [],
+  "block": "粉土、砂岩、泥岩钻进参数：20m桩基岩层比例60%，整体进度4h。",
+  "submit": false,
+  "tag": ["#id2","name","unit","quantity","info"]
+},{
+  "id": 3,
+  "axis": -1,
+  "date": "2020/7/5",
+  "title": "2020年7月5日",
+  "contents": ["桩基施工各工序功效参数，待续......"],
+  "items": [],
+  "block": "",
+  "submit": false,
+  "tag": ["#id3","name","unit","quantity","info"]
+}]

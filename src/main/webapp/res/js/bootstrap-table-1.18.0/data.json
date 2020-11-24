@@ -1,0 +1,71 @@
+﻿{
+  "total": 7,
+  "rows": [
+  	{
+      "Id": 0,
+      "ProductName": "total",
+      "StockNum": "rows"
+    },
+    {
+      "Id": 1,
+      "ProductName": "香蕉",
+      "StockNum": "100"
+    },
+    {
+      "Id": 2,
+      "ProductName": "苹果",
+      "StockNum": "200"
+    },
+    {
+      "Id": 3,
+      "ProductName": "橘子",
+      "StockNum": "300"
+    },
+    {
+      "Id": 4,
+      "ProductName": "草莓",
+      "StockNum": "400"
+    },
+    {
+      "Id": 5,
+      "ProductName": "樱桃",
+      "StockNum": "500"
+    },
+    {
+      "Id": 6,
+      "ProductName": "车厘子",
+      "StockNum": "600"
+    }
+  ],
+  
+  
+  
+  "count": 4,
+  "data": [
+  	{
+      "Id": 0,
+      "ProductName": "count",
+      "StockNum": "data"
+    },
+    {
+      "Id": 1,
+      "ProductName": "香蕉",
+      "StockNum": "100"
+    },
+    {
+      "Id": 2,
+      "ProductName": "苹果",
+      "StockNum": "200"
+    },
+    {
+      "Id": 3,
+      "ProductName": "橘子",
+      "StockNum": "300"
+    },
+    {
+      "Id": 4,
+      "ProductName": "草莓",
+      "StockNum": "400"
+    }
+  ]
+}

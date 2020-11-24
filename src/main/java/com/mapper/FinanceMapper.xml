@@ -1,0 +1,558 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.FinanceMapper">
+  <resultMap id="BaseResultMap" type="com.model.Finance">
+    <id column="p_code" jdbcType="CHAR" property="pCode" />
+    <result column="p_date" jdbcType="TIMESTAMP" property="pDate" />
+    <result column="f_code" jdbcType="CHAR" property="fCode" />
+    <result column="m_code" jdbcType="CHAR" property="mCode" />
+    <result column="p_qty" jdbcType="DOUBLE" property="pQty" />
+    <result column="p_money" jdbcType="DOUBLE" property="pMoney" />
+    <result column="p_type" jdbcType="VARCHAR" property="pType" />
+    <result column="p_method" jdbcType="VARCHAR" property="pMethod" />
+    <result column="p_info" jdbcType="VARCHAR" property="pInfo" />
+  </resultMap>
+  <resultMap id="BaseResultMapExtends" type="com.model.Finance" extends="BaseResultMap">
+    <association property="funds" javaType="com.model.Funds"
+                 select="com.mapper.FundsMapper.selectByPrimaryKey" column="f_code">
+    </association>
+    <association property="member" javaType="com.model.Member"
+                 select="com.mapper.MemberMapper.selectByPrimaryKey" column="m_code">
+    </association>
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+    <include refid="Model_Clause_Offset" />
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+    <include refid="Model_Clause_Offset" />
+  </sql>
+  <sql id="Model_Where_Clause">
+    <where>
+      <if test="record.pCode != null">
+        p_code = #{record.pCode,jdbcType=CHAR}
+      </if>
+      <if test="record.pDate != null">
+        and p_date = #{record.pDate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="record.fCode != null">
+        and f_code = #{record.fCode,jdbcType=CHAR}
+      </if>
+      <if test="record.mCode != null">
+        and m_code = #{record.mCode,jdbcType=CHAR}
+      </if>
+      <if test="record.pQty != null">
+        and p_qty = #{record.pQty,jdbcType=DOUBLE}
+      </if>
+      <if test="record.pMoney != null">
+        and p_money = #{record.pMoney,jdbcType=DOUBLE}
+      </if>
+      <if test="record.pType != null">
+        and p_type = #{record.pType,jdbcType=VARCHAR}
+      </if>
+      <if test="record.pMethod != null">
+        and p_method = #{record.pMethod,jdbcType=VARCHAR}
+      </if>
+      <if test="record.pInfo != null">
+        and p_info = #{record.pInfo,jdbcType=VARCHAR}
+      </if>
+    </where>
+    <include refid="Model_Clause_Offset" />
+  </sql>
+  <sql id="Model_Query_Clause">
+    <where>
+      <if test="record.pCode != null">
+        p_code like concat('%', #{record.pCode,jdbcType=CHAR}, '%')
+      </if>
+      <if test="record.pDate != null">
+        and p_date like concat('%', #{record.pDate,jdbcType=TIMESTAMP}, '%')
+      </if>
+      <if test="record.fCode != null">
+        and f_code like concat('%', #{record.fCode,jdbcType=CHAR}, '%')
+      </if>
+      <if test="record.mCode != null">
+        and m_code like concat('%', #{record.mCode,jdbcType=CHAR}, '%')
+      </if>
+      <if test="record.pQty != null">
+        and p_qty like concat('%', #{record.pQty,jdbcType=DOUBLE}, '%')
+      </if>
+      <if test="record.pMoney != null">
+        and p_money like concat('%', #{record.pMoney,jdbcType=DOUBLE}, '%')
+      </if>
+      <if test="record.pType != null">
+        and p_type like concat('%', #{record.pType,jdbcType=VARCHAR}, '%')
+      </if>
+      <if test="record.pMethod != null">
+        and p_method like concat('%', #{record.pMethod,jdbcType=VARCHAR}, '%')
+      </if>
+      <if test="record.pInfo != null">
+        and p_info like concat('%', #{record.pInfo,jdbcType=VARCHAR}, '%')
+      </if>
+    </where>
+    <include refid="Model_Clause_Offset" />
+  </sql>
+  <sql id="Model_Clause_Offset">
+	  <if test="_parameter != null">
+	    <if test="_parameter.containsKey('limit') and limit != null">
+	      <choose>
+	        <when test="_parameter.containsKey('offset') and offset != null">
+	          order by p_code asc limit #{offset}, #{limit};
+	        </when>
+	        <otherwise>
+	          order by p_code asc limit  #{limit};
+	        </otherwise>
+	      </choose>
+	    </if>
+    </if>
+  </sql>
+  <sql id="Model_Clause_Order">
+    <if test="_parameter != null">
+      <choose>
+        <when test="_parameter.containsKey('field') and field != null">
+          order by ${field} asc;
+        </when>
+        <otherwise>
+          order by p_code asc;
+        </otherwise>
+      </choose>
+    </if>
+  </sql>
+  <sql id="Base_Column_List">
+    p_code, p_date, f_code, m_code, p_qty, p_money, p_type, p_method, p_info
+  </sql>
+  <sql id="Param_Column_List">
+    <choose>
+      <when test="_parameter != null">
+        <if test="_parameter.containsKey('fields') and fields != null">
+          ${fields}
+        </if>
+      </when>
+      <otherwise>
+        <include refid="Base_Column_List" />
+      </otherwise>
+    </choose>
+  </sql>
+  <sql id="Param_Where_Clause_Like">
+    <if test="_parameter != null">
+      <if test="_parameter.containsKey('field') and field != null">
+        <where>
+          <if test="_parameter.containsKey('value') and value != null">
+            ${field} like concat('%', #{value}, '%')
+          </if>
+        </where>
+        <if test="_parameter.containsKey('limit') and limit != null">
+          <choose>
+            <when test="_parameter.containsKey('offset') and offset != null">
+              order by ${field} asc limit #{offset}, #{limit};
+            </when>
+            <otherwise>
+              order by ${field} asc limit  #{limit};
+            </otherwise>
+          </choose>
+        </if>
+      </if>
+    </if>
+  </sql>
+  <sql id="Param_Where_Clause_Equal">
+    <if test="_parameter != null">
+      <if test="_parameter.containsKey('field') and field != null">
+        <where>
+          <if test="_parameter.containsKey('value') and value != null">
+            ${field} = #{value}
+          </if>
+          <if test="_parameter.containsKey('value1') and _parameter.containsKey('value2')">
+            <if test="value1 != null and value2 != null">
+              ${field} between #{value1} and #{value2}
+            </if>
+          </if>
+        </where>
+        <if test="_parameter.containsKey('limit') and limit != null">
+          <choose>
+            <when test="_parameter.containsKey('offset') and offset != null">
+              order by ${field} asc limit #{offset}, #{limit};
+            </when>
+            <otherwise>
+              order by ${field} asc limit  #{limit};
+            </otherwise>
+          </choose>
+        </if>
+      </if>
+    </if>
+  </sql>
+  <sql id="Param_Where_Clause_Sql">
+    <where>
+      <choose>
+        <when test="_parameter != null">
+          <if test="_parameter.containsKey('sql') and sql != null">
+            ${sql}
+          </if>
+        </when>
+        <otherwise>
+          p_code is null
+        </otherwise>
+      </choose>
+    </where>
+    <include refid="Model_Clause_Offset" />
+  </sql>
+  <select id="selectByExample" parameterType="com.model.FinanceExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_finance
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMapExtends">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_finance
+    where p_code = #{pCode,jdbcType=CHAR}
+  </select>
+  <select id="selectByMinPrimaryKey" resultMap="BaseResultMapExtends">
+    select
+    <include refid="Base_Column_List" />
+    from tb_finance
+    where p_code = (select min(p_code) from tb_finance)
+  </select>
+  <select id="selectByMaxPrimaryKey" resultMap="BaseResultMapExtends">
+    select
+    <include refid="Base_Column_List" />
+    from tb_finance
+    where p_code = (select max(p_code) from tb_finance)
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from tb_finance
+    where p_code = #{pCode,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.model.FinanceExample">
+    delete from tb_finance
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <delete id="deleteAllModel">
+    delete from tb_finance
+  </delete>
+  <insert id="insert" keyColumn="p_code" keyProperty="pCode" parameterType="com.model.Finance" useGeneratedKeys="true">
+    insert into tb_finance (p_code, p_date, f_code, m_code, p_qty, p_money, p_type, p_method, p_info)
+    values (#{pCode,jdbcType=CHAR}, #{pDate,jdbcType=TIMESTAMP}, #{fCode,jdbcType=CHAR}, #{mCode,jdbcType=CHAR},
+      #{pQty,jdbcType=DOUBLE}, #{pMoney,jdbcType=DOUBLE}, #{pType,jdbcType=VARCHAR}, #{pMethod,jdbcType=VARCHAR}, #{pInfo,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="p_code" keyProperty="pCode" parameterType="com.model.Finance" useGeneratedKeys="true">
+    insert into tb_finance
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="pCode != null">
+        p_code,
+      </if>
+      <if test="pDate != null">
+        p_date,
+      </if>
+      <if test="fCode != null">
+        f_code,
+      </if>
+      <if test="mCode != null">
+        m_code,
+      </if>
+      <if test="pQty != null">
+        p_qty,
+      </if>
+      <if test="pMoney != null">
+        p_money,
+      </if>
+      <if test="pType != null">
+        p_type,
+      </if>
+      <if test="pMethod != null">
+        p_method,
+      </if>
+      <if test="pInfo != null">
+        p_info,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="pCode != null">
+        #{pCode,jdbcType=CHAR},
+      </if>
+      <if test="pDate != null">
+        #{pDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fCode != null">
+        #{fCode,jdbcType=CHAR},
+      </if>
+      <if test="mCode != null">
+        #{mCode,jdbcType=CHAR},
+      </if>
+      <if test="pQty != null">
+        #{pQty,jdbcType=DOUBLE},
+      </if>
+      <if test="pMoney != null">
+        #{pMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="pType != null">
+        #{pType,jdbcType=VARCHAR},
+      </if>
+      <if test="pMethod != null">
+        #{pMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="pInfo != null">
+        #{pInfo,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.model.FinanceExample" resultType="java.lang.Long">
+    select count(*) from tb_finance
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <select id="countByModel" parameterType="com.model.Guidance" resultType="java.lang.Long">
+    select count(*) from tb_finance
+    <if test="_parameter != null">
+      <include refid="Model_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tb_finance
+    <set>
+      <if test="record.pCode != null">
+        p_code = #{record.pCode,jdbcType=CHAR},
+      </if>
+      <if test="record.pDate != null">
+        p_date = #{record.pDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fCode != null">
+        f_code = #{record.fCode,jdbcType=CHAR},
+      </if>
+      <if test="record.mCode != null">
+        m_code = #{record.mCode,jdbcType=CHAR},
+      </if>
+      <if test="record.pQty != null">
+        p_qty = #{record.pQty,jdbcType=DOUBLE},
+      </if>
+      <if test="record.pMoney != null">
+        p_money = #{record.pMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="record.pType != null">
+        p_type = #{record.pType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pMethod != null">
+        p_method = #{record.pMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pInfo != null">
+        p_info = #{record.pInfo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tb_finance
+    set p_code = #{record.pCode,jdbcType=CHAR},
+      p_date = #{record.pDate,jdbcType=TIMESTAMP},
+      f_code = #{record.fCode,jdbcType=CHAR},
+      m_code = #{record.mCode,jdbcType=CHAR},
+      p_qty = #{record.pQty,jdbcType=DOUBLE},
+      p_money = #{record.pMoney,jdbcType=DOUBLE},
+      p_type = #{record.pType,jdbcType=VARCHAR},
+      p_method = #{record.pMethod,jdbcType=VARCHAR},
+      p_info = #{record.pInfo,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.model.Finance">
+    update tb_finance
+    <set>
+      <if test="pDate != null">
+        p_date = #{pDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fCode != null">
+        f_code = #{fCode,jdbcType=CHAR},
+      </if>
+      <if test="mCode != null">
+        m_code = #{mCode,jdbcType=CHAR},
+      </if>
+      <if test="pQty != null">
+        p_qty = #{pQty,jdbcType=DOUBLE},
+      </if>
+      <if test="pMoney != null">
+        p_money = #{pMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="pType != null">
+        p_type = #{pType,jdbcType=VARCHAR},
+      </if>
+      <if test="pMethod != null">
+        p_method = #{pMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="pInfo != null">
+        p_info = #{pInfo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where p_code = #{pCode,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.model.Finance">
+    update tb_finance
+    set p_date = #{pDate,jdbcType=TIMESTAMP},
+      f_code = #{fCode,jdbcType=CHAR},
+      m_code = #{mCode,jdbcType=CHAR},
+      p_qty = #{pQty,jdbcType=DOUBLE},
+      p_money = #{pMoney,jdbcType=DOUBLE},
+      p_type = #{pType,jdbcType=VARCHAR},
+      p_method = #{pMethod,jdbcType=VARCHAR},
+      p_info = #{pInfo,jdbcType=VARCHAR}
+    where p_code = #{pCode,jdbcType=CHAR}
+  </update>
+  <select id="selectAllModel" resultMap="BaseResultMapExtends">
+    select
+    <include refid="Base_Column_List" />
+    from tb_finance
+    <include refid="Model_Clause_Offset" />
+  </select>
+  <select id="countAllModel" resultType="java.lang.Long">
+    select count(*) from tb_finance
+  </select>
+  <select id="selectByParam" parameterType="map" resultMap="BaseResultMapExtends">
+    select
+    <include refid="Base_Column_List" />
+    from tb_finance
+    <include refid="Model_Where_Clause" />
+  </select>
+  <select id="countBySelectParam" parameterType="map" resultType="java.lang.Long">
+    select count(*) from tb_finance
+    <include refid="Model_Where_Clause" />
+  </select>
+  <select id="queryByParam" parameterType="map" resultMap="BaseResultMapExtends">
+    select
+    <include refid="Base_Column_List" />
+    from tb_finance
+    <include refid="Model_Query_Clause" />
+  </select>
+  <select id="countByQueryParam" parameterType="map" resultType="java.lang.Long">
+    select count(*) from tb_finance
+    <include refid="Model_Query_Clause" />
+  </select>
+  <select id="selectByCondition" resultMap="BaseResultMapExtends">
+    select
+    <include refid="Base_Column_List" />
+    from tb_finance
+    <include refid="Param_Where_Clause_Equal" />
+  </select>
+  <select id="countBySelectCondition" resultType="java.lang.Long">
+    select count(*) from tb_finance
+    <include refid="Param_Where_Clause_Equal" />
+  </select>
+  <select id="queryByCondition" resultMap="BaseResultMapExtends">
+    select
+    <include refid="Base_Column_List" />
+    from tb_finance
+    <include refid="Param_Where_Clause_Like" />
+  </select>
+  <select id="countByQueryCondition" resultType="java.lang.Long">
+    select count(*) from tb_finance
+    <include refid="Param_Where_Clause_Like" />
+  </select>
+  <select id="selectFieldsByParam" parameterType="map" resultMap="BaseResultMap">
+    select
+    <include refid="Param_Column_List" />
+    from tb_finance
+    <include refid="Model_Where_Clause" />
+  </select>
+  <select id="queryFieldsByParam" parameterType="map" resultMap="BaseResultMap">
+    select
+    <include refid="Param_Column_List" />
+    from tb_finance
+    <include refid="Model_Query_Clause" />
+  </select>
+  <select id="selectFieldsByCondition" resultMap="BaseResultMap">
+    select
+    <include refid="Param_Column_List" />
+    from tb_finance
+    <include refid="Param_Where_Clause_Equal" />
+  </select>
+  <select id="queryFieldsByCondition" resultMap="BaseResultMap">
+    select
+    <include refid="Param_Column_List" />
+    from tb_finance
+    <include refid="Param_Where_Clause_Like" />
+  </select>
+  <select id="selectBySql" resultMap="BaseResultMap" statementType="STATEMENT">
+    select
+    <include refid="Base_Column_List" />
+    from tb_finance
+    <include refid="Param_Where_Clause_Sql" />
+  </select>
+  <select id="selectFieldsBySql" resultMap="BaseResultMap" statementType="STATEMENT">
+    select
+    <include refid="Param_Column_List" />
+    from tb_finance
+    <include refid="Param_Where_Clause_Sql" />
+  </select>
+</mapper>

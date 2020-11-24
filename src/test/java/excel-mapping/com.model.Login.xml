@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<excel-mapping name="用户信息">
+  <property name="userId" column="编号" width="30"/>
+  <property
+    name="username"
+    column="用户名"
+    required="true"
+    validator="com.wuwenze.validator.UsernameValidator"
+    comment="请填写用户名，最大长度为12，且不能重复"
+  />
+  <property name="password" column="密码" required="true" maxLength="32"/>
+  <property name="email" column="邮箱" validator="com.wuwenze.validator.UserEmailValidator"/>
+  <property
+    name="sex"
+    column="性别"
+    readConverterExp="未知=0,男=1,女=2"
+    writeConverterExp="0=未知,1=男,2=女"
+    options="com.wuwenze.options.SexOptions"
+  />
+  <property name="userGroup.name" column="用户组" options="com.wuwenze.options.UserGroupNameOptions"/>
+  <property name="createAt" column="创建时间" dateFormat="yyyy/MM/dd HH:mm:ss"/>
+  <property
+    name="customizeField"
+    column="自定义字段"
+    maxLength="80"
+    comment="可以乱填，但是长度不能超过80，导入时最终会转换为数字"
+    writeConverter="com.wuwenze.converter.CustomizeFieldWriteConverter"
+    readConverter="com.wuwenze.converter.CustomizeFieldReadConverter"
+  />
+</excel-mapping>

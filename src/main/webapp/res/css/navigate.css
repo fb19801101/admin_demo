@@ -1,0 +1,388 @@
+BODY
+{
+	font-size: 12px;
+	margin: 0px;
+}
+
+div, p, select, td
+{
+	font: 12px 宋体;
+}
+
+
+/*
+上下文菜单相关
+*/
+.divMemu
+{
+	position: absolute;
+	background-color: #6699cc;
+	border:1px solid #99ccff;
+}
+
+.tdLeft
+{
+	background-color: #5389bc;
+	border-top:1px solid #5389bc;
+	border-bottom:1px solid #5389bc;
+	border-left:1px solid #5389bc;
+	padding-left: 4px;
+	padding-right: 4px;
+	padding-top: 4px;
+	padding-bottom: 3px;
+	cursor: default;
+}
+
+.tdMiddle
+{
+	font-family:宋体;
+	font-size: 11px;
+	font-weight: normal;
+	color: white;
+	background-color: #6699cc;
+	border-top: 1px solid #6699cc;
+	border-bottom: 1px solid #6699cc;
+	padding-top: 2px;
+	padding-bottom:2px;
+	padding-left: 6px;
+	padding-right: 8px;
+	cursor: hand;
+}
+.tdRight
+{
+	background-color: #6699cc;
+	border-top: 1px solid #6699cc;
+	border-bottom: 1px solid #6699cc;
+	border-right: 1px solid #6699cc;
+	padding-right: 6px;
+}
+.subMenu
+{
+	position: absolute;
+	background-color: #6699cc;
+	border:1px solid #99ccff;
+	display: none;
+}
+/*
+	控制台边框样式
+*/
+.frameBorder
+{
+	background-color: #D4D0C8;
+	border-right: 1px ridge;
+	border-top: 0px;
+	border-left: 1px outset;
+	border-bottom: 0px;
+	filter:progid:DXImageTransform.Microsoft.Alpha(style=1,opacity=100,finishOpacity=30);
+}
+/*
+	菜单条的样式
+*/
+.menuBar
+{
+	z-index: 10;
+	width: 100%;
+	background-color: #f0eee0;
+	padding:1px;
+}
+/*
+	菜单条中菜单样式
+*/
+.menuTable
+{
+	margin:0;
+	padding:0;
+	borderCollapse:collapse;
+	tableLayout:fixed;
+}
+/*
+	菜单项目,单元格样式
+*/
+.menuCell
+{
+	margin:0;
+	padding-right: 0px;
+	padding-left: 0px;
+	padding-bottom: 0px;
+	padding-top: 2px;
+	font-size: 12px;
+	text-align: center;
+	width:58;
+	height:20;
+	cursor:default;
+}
+
+.Button
+{
+	BORDER-BOTTOM: buttonface 1px solid;
+	BORDER-LEFT: buttonface 1px solid;
+	BORDER-RIGHT: buttonface 1px solid;
+	BORDER-TOP: buttonface 1px solid;
+	TOP: 1px;
+}
+.Button_Mouse_Over
+{
+
+	BORDER-BOTTOM: buttonshadow 1px solid;
+	BORDER-LEFT: buttonhighlight 1px solid;
+	BORDER-RIGHT: buttonshadow 1px solid;
+	BORDER-TOP: buttonhighlight 1px solid;
+	TOP: 1px;
+}
+
+.lframeBorder { Z-INDEX: 2; VISIBILITY: inherit; WIDTH: 100%; HEIGHT: 100% }
+
+.divTop
+{
+	width: 100%;
+	background-color: #f0eee0;
+	padding:1px;
+	border:#D4D0C8 1px solid;
+}
+
+@media print
+{
+	.print{display:none;}
+}
+
+/*未访问过的超链接样式 */
+a:link
+{
+	color: #0066FF;
+	text-decoration: none;
+}
+
+/*访问过的超链接样式 */
+a:visited
+{
+	color: #0066FF;
+	text-decoration: none;
+}
+
+/*鼠标指向的超链接样式 */
+a:hover
+{
+	color: #787878;
+	text-decoration: none;
+}
+
+/* 文本框和按钮的样式 */
+input.txt, input.btn
+{
+	font: 12px 宋体;
+	border: 1 solid #000000;
+}
+
+/*通用表格样式 */
+table.table
+{
+	background-color: #999999;
+}
+
+/* 显示列标题的表格行 */
+tr.column_title
+{
+	height: 25px;
+	text-align: center;
+	background-image: url(../img/title.png);
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+/* 列表的通用内容行 */
+tr.list
+{
+	height: 25px;
+	text-align: center;
+	background-color: white;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+/* 列表奇数内容行 */
+tr.list_odd
+{
+	height: 25px;
+	text-align: center;
+	background-color: #f5f5f5;
+	padding-left: 5px;
+	padding-right: 5px;
+	behavior: url(css/behavior.htc);
+}
+
+/* 列表偶数内容行 */
+tr.list_even
+{
+	height: 25px;
+	text-align: center;
+	background-color: #e8e8e8;
+	padding-left: 5px;
+	padding-right: 5px;
+	behavior: url(css/behavior.htc);
+}
+
+/* 当鼠标移至列表行的样式 */
+tr.list_over
+{
+	height: 25px;
+	text-align: center;
+	background-color: #ddd;
+	padding-left: 5px;
+	padding-right: 5px;
+	behavior: url(css/behavior.htc);
+}
+
+/* 翻页的导航条所在行 */
+tr.pageRoll
+{
+	background-color: white;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+/* 错误提示 */
+td.error, div.error, span.error
+{
+	background-color: white;
+	font-size: 12px;
+	color: red;
+	text-align: center;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+/* 列表的主标题所在的单元格 */
+td.main_title
+{
+	background-image: url(../img/title.png);
+	font: 12px "宋体" , "Arial";
+	color: #000000;
+	height: 23px;
+	text-align: center;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+/* 顶部标题框文字 */
+td.top
+{
+	font-size: 14px;
+	font-weight: bold;
+	height: 35px;
+	background-color: #f1f1f1;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+/*表单内容行的标题单元格*/
+td.form_title
+{
+	height: 23px;
+	text-align: right;
+	background-image: url(../img/title.png);
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+/*表单内容行的内容单元格*/
+td.form_input
+{
+	height: 23px;
+	background-color: white;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+/* 翻页的导航条所在单元格 */
+td.pageRoll
+{
+	text-align: right;
+	background-color: white;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+/* 通用单元格样式 */
+td.value
+{
+	text-indent: 5px;
+	background-color: white;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+/* 显示明细标题的单元格 */
+td.detail
+{
+	text-align: center;
+	background-color: #ffffcc;
+}
+
+/*  隐藏的单元格标题样式  */
+.nestTdHead
+{
+	height: 23px;
+	text-align: center;
+	background-color:#D6DFE7;
+}
+
+/*  隐藏的单元格内容样式  */
+.nestTd
+{
+	height: 23px;
+	text-align: center;
+	background-color:#F7F3F7;
+}
+
+/* 显示明细标题的单元格 */
+td.detail2
+{
+	text-align: center;
+	background-color: #ccffcc;
+}
+
+/*  隐藏的单元格标题样式2  */
+.nestTdHead2
+{
+	height: 23px;
+	text-align: center;
+	background-color:#CAE5E8;
+}
+
+/*  隐藏的单元格内容样式2  */
+.nestTd2
+{
+	height: 23px;
+	text-align: center;
+	background-color:#ececec;
+}
+.msgtable{
+	/*
+    background-color: #ffffff;
+    BORDER-LEFT-COLOR: #ffffff;
+    BORDER-TOP-COLOR: #ffffff;
+    BORDER-RIGHT-COLOR: #ffffff;
+    border-bottom-color: #ffffff;
+    border-style:groove;
+    border-width:1px;
+    */
+}
+.area{
+	background-color: #ffffff;
+	BORDER-LEFT-COLOR: #7fcfff;
+	BORDER-TOP-COLOR: #7fcfff;
+	BORDER-RIGHT-COLOR: #7fcfff;
+	border-bottom-color: #7fcfff;
+	border-style:none;
+	/*border-style:groove; */
+	border-width:1px;
+	font-size:10pt;
+	/*width:100%;*/
+	/*width:10%;*/
+	SCROLLBAR-DARKSHADOW-COLOR: #7fcfff;
+	/*SCROLLBAR-FACE-COLOR: #ffffff;*/
+	/*SCROLLBAR-SHADOW-COLOR: #ffffff;*/
+	/*SCROLLBAR-3DLIGHT-COLOR: #ffffff;*/
+	SCROLLBAR-ARROW-COLOR: #ffffff;
+	/*SCROLLBAR-TRACK-COLOR: #ffffff;*/
+}

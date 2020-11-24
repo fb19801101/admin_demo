@@ -1,0 +1,508 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.FundsMapper">
+  <resultMap id="BaseResultMap" type="com.model.Funds">
+    <id column="f_code" jdbcType="CHAR" property="fCode" />
+    <result column="f_name" jdbcType="VARCHAR" property="fName" />
+    <result column="f_category" jdbcType="VARCHAR" property="fCategory" />
+    <result column="f_business" jdbcType="VARCHAR" property="fBusiness" />
+    <result column="f_unit" jdbcType="VARCHAR" property="fUnit" />
+    <result column="f_price" jdbcType="DOUBLE" property="fPrice" />
+    <result column="f_info" jdbcType="VARCHAR" property="fInfo" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+    <include refid="Model_Clause_Offset" />
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+    <include refid="Model_Clause_Offset" />
+  </sql>
+  <sql id="Model_Where_Clause">
+    <where>
+      <if test="record.fCode != null">
+        f_code = #{record.fCode,jdbcType=CHAR}
+      </if>
+      <if test="record.fName != null">
+        and f_name = #{record.fName,jdbcType=VARCHAR}
+      </if>
+      <if test="record.fCategory != null">
+        and f_category = #{record.fCategory,jdbcType=VARCHAR}
+      </if>
+      <if test="record.fBusiness != null">
+        and f_business = #{record.fBusiness,jdbcType=VARCHAR}
+      </if>
+      <if test="record.fUnit != null">
+        and f_unit = #{record.fUnit,jdbcType=VARCHAR}
+      </if>
+      <if test="record.fPrice != null">
+        and f_price = #{record.fPrice,jdbcType=DOUBLE}
+      </if>
+      <if test="record.fInfo != null">
+        and f_info = #{record.fInfo,jdbcType=VARCHAR}
+      </if>
+    </where>
+    <include refid="Model_Clause_Offset" />
+  </sql>
+  <sql id="Model_Query_Clause">
+    <where>
+      <if test="record.fCode != null">
+        f_code like concat('%', #{record.fCode,jdbcType=CHAR}, '%')
+      </if>
+      <if test="record.fName != null">
+        and f_name like concat('%', #{record.fName,jdbcType=VARCHAR}, '%')
+      </if>
+      <if test="record.fCategory != null">
+        and f_category like concat('%', #{record.fCategory,jdbcType=VARCHAR}, '%')
+      </if>
+      <if test="record.fBusiness != null">
+        and f_business like concat('%', #{record.fBusiness,jdbcType=VARCHAR}, '%')
+      </if>
+      <if test="record.fUnit != null">
+        and f_unit like concat('%', #{record.fUnit,jdbcType=VARCHAR}, '%')
+      </if>
+      <if test="record.fPrice != null">
+        and f_price like concat('%', #{record.fPrice,jdbcType=DOUBLE}, '%')
+      </if>
+      <if test="record.fInfo != null">
+        and f_info like concat('%', #{record.fInfo,jdbcType=VARCHAR}, '%')
+      </if>
+    </where>
+    <include refid="Model_Clause_Offset" />
+  </sql>
+  <sql id="Model_Clause_Offset">
+	  <if test="_parameter != null">
+	    <if test="_parameter.containsKey('limit') and limit != null">
+	      <choose>
+	        <when test="_parameter.containsKey('offset') and offset != null">
+	          order by f_code asc limit #{offset}, #{limit};
+	        </when>
+	        <otherwise>
+	          order by f_code asc limit  #{limit};
+	        </otherwise>
+	      </choose>
+	    </if>
+    </if>
+  </sql>
+  <sql id="Model_Clause_Order">
+    <if test="_parameter != null">
+      <choose>
+        <when test="_parameter.containsKey('field') and field != null">
+          order by ${field} asc;
+        </when>
+        <otherwise>
+          order by f_code asc;
+        </otherwise>
+      </choose>
+    </if>
+  </sql>
+  <sql id="Base_Column_List">
+    f_code, f_name, f_category, f_business, f_unit, f_price, f_info
+  </sql>
+  <sql id="Param_Column_List">
+    <choose>
+      <when test="_parameter != null">
+        <if test="_parameter.containsKey('fields') and fields != null">
+          ${fields}
+        </if>
+      </when>
+      <otherwise>
+        <include refid="Base_Column_List" />
+      </otherwise>
+    </choose>
+  </sql>
+  <sql id="Param_Where_Clause_Like">
+    <if test="_parameter != null">
+      <if test="_parameter.containsKey('field') and field != null">
+        <where>
+          <if test="_parameter.containsKey('value') and value != null">
+            ${field} like concat('%', #{value}, '%')
+          </if>
+        </where>
+        <if test="_parameter.containsKey('limit') and limit != null">
+          <choose>
+            <when test="_parameter.containsKey('offset') and offset != null">
+              order by ${field} asc limit #{offset}, #{limit};
+            </when>
+            <otherwise>
+              order by ${field} asc limit  #{limit};
+            </otherwise>
+          </choose>
+        </if>
+      </if>
+    </if>
+  </sql>
+  <sql id="Param_Where_Clause_Equal">
+    <if test="_parameter != null">
+      <if test="_parameter.containsKey('field') and field != null">
+        <where>
+          <if test="_parameter.containsKey('value') and value != null">
+            ${field} = #{value}
+          </if>
+          <if test="_parameter.containsKey('value1') and _parameter.containsKey('value2')">
+            <if test="value1 != null and value2 != null">
+              ${field} between #{value1} and #{value2}
+            </if>
+          </if>
+        </where>
+        <if test="_parameter.containsKey('limit') and limit != null">
+          <choose>
+            <when test="_parameter.containsKey('offset') and offset != null">
+              order by ${field} asc limit #{offset}, #{limit};
+            </when>
+            <otherwise>
+              order by ${field} asc limit  #{limit};
+            </otherwise>
+          </choose>
+        </if>
+      </if>
+    </if>
+  </sql>
+  <sql id="Param_Where_Clause_Sql">
+    <where>
+      <choose>
+        <when test="_parameter != null">
+          <if test="_parameter.containsKey('sql') and sql != null">
+            ${sql}
+          </if>
+        </when>
+        <otherwise>
+          f_code is null
+        </otherwise>
+      </choose>
+    </where>
+    <include refid="Model_Clause_Offset" />
+  </sql>
+  <select id="selectByExample" parameterType="com.model.FundsExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_funds
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_funds
+    where f_code = #{fCode,jdbcType=CHAR}
+  </select>
+  <select id="selectByMinPrimaryKey" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from tb_funds
+    where f_code = (select min(f_code) from tb_funds)
+  </select>
+  <select id="selectByMaxPrimaryKey" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from tb_funds
+    where f_code = (select max(f_code) from tb_funds)
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from tb_funds
+    where f_code = #{fCode,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.model.FundsExample">
+    delete from tb_funds
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <delete id="deleteAllModel">
+    delete from tb_funds
+  </delete>
+  <insert id="insert" keyColumn="f_code" keyProperty="fCode" parameterType="com.model.Funds" useGeneratedKeys="true">
+    insert into tb_funds (f_code, f_name, f_category, f_business, f_unit, f_price, f_info)
+    values (#{fCode,jdbcType=CHAR}, #{fName,jdbcType=VARCHAR}, #{fCategory,jdbcType=VARCHAR}, #{fBusiness,jdbcType=VARCHAR},
+      #{fUnit,jdbcType=VARCHAR}, #{fPrice,jdbcType=DOUBLE}, #{fInfo,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="f_code" keyProperty="fCode" parameterType="com.model.Funds" useGeneratedKeys="true">
+    insert into tb_funds
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fCode != null">
+        f_code,
+      </if>
+      <if test="fName != null">
+        f_name,
+      </if>
+      <if test="fCategory != null">
+        f_category,
+      </if>
+      <if test="fBusiness != null">
+        f_business,
+      </if>
+      <if test="fUnit != null">
+        f_unit,
+      </if>
+      <if test="fPrice != null">
+        f_price,
+      </if>
+      <if test="fInfo != null">
+        f_info,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fCode != null">
+        #{fCode,jdbcType=CHAR},
+      </if>
+      <if test="fName != null">
+        #{fName,jdbcType=VARCHAR},
+      </if>
+      <if test="fCategory != null">
+        #{fCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="fBusiness != null">
+        #{fBusiness,jdbcType=VARCHAR},
+      </if>
+      <if test="fUnit != null">
+        #{fUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="fPrice != null">
+        #{fPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="fInfo != null">
+        #{fInfo,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.model.FundsExample" resultType="java.lang.Long">
+    select count(*) from tb_funds
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <select id="countByModel" parameterType="com.model.Guidance" resultType="java.lang.Long">
+    select count(*) from tb_funds
+    <if test="_parameter != null">
+      <include refid="Model_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tb_funds
+    <set>
+      <if test="record.fCode != null">
+        f_code = #{record.fCode,jdbcType=CHAR},
+      </if>
+      <if test="record.fName != null">
+        f_name = #{record.fName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fCategory != null">
+        f_category = #{record.fCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fBusiness != null">
+        f_business = #{record.fBusiness,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fUnit != null">
+        f_unit = #{record.fUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fPrice != null">
+        f_price = #{record.fPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.fInfo != null">
+        f_info = #{record.fInfo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tb_funds
+    set f_code = #{record.fCode,jdbcType=CHAR},
+      f_name = #{record.fName,jdbcType=VARCHAR},
+      f_category = #{record.fCategory,jdbcType=VARCHAR},
+      f_business = #{record.fBusiness,jdbcType=VARCHAR},
+      f_unit = #{record.fUnit,jdbcType=VARCHAR},
+      f_price = #{record.fPrice,jdbcType=DOUBLE},
+      f_info = #{record.fInfo,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.model.Funds">
+    update tb_funds
+    <set>
+      <if test="fName != null">
+        f_name = #{fName,jdbcType=VARCHAR},
+      </if>
+      <if test="fCategory != null">
+        f_category = #{fCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="fBusiness != null">
+        f_business = #{fBusiness,jdbcType=VARCHAR},
+      </if>
+      <if test="fUnit != null">
+        f_unit = #{fUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="fPrice != null">
+        f_price = #{fPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="fInfo != null">
+        f_info = #{fInfo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where f_code = #{fCode,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.model.Funds">
+    update tb_funds
+    set f_name = #{fName,jdbcType=VARCHAR},
+      f_category = #{fCategory,jdbcType=VARCHAR},
+      f_business = #{fBusiness,jdbcType=VARCHAR},
+      f_unit = #{fUnit,jdbcType=VARCHAR},
+      f_price = #{fPrice,jdbcType=DOUBLE},
+      f_info = #{fInfo,jdbcType=VARCHAR}
+    where f_code = #{fCode,jdbcType=CHAR}
+  </update>
+  <select id="selectAllModel" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from tb_funds
+    <include refid="Model_Clause_Offset" />
+  </select>
+  <select id="countAllModel" resultType="java.lang.Long">
+    select count(*) from tb_funds
+  </select>
+  <select id="selectByParam" parameterType="map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from tb_funds
+    <include refid="Model_Where_Clause" />
+  </select>
+  <select id="countBySelectParam" parameterType="map" resultType="java.lang.Long">
+    select count(*) from tb_funds
+    <include refid="Model_Where_Clause" />
+  </select>
+  <select id="queryByParam" parameterType="map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from tb_funds
+    <include refid="Model_Query_Clause" />
+  </select>
+  <select id="countByQueryParam" parameterType="map" resultType="java.lang.Long">
+    select count(*) from tb_funds
+    <include refid="Model_Query_Clause" />
+  </select>
+  <select id="selectByCondition" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from tb_funds
+    <include refid="Param_Where_Clause_Equal" />
+  </select>
+  <select id="countBySelectCondition" resultType="java.lang.Long">
+    select count(*) from tb_funds
+    <include refid="Param_Where_Clause_Equal" />
+  </select>
+  <select id="queryByCondition" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from tb_funds
+    <include refid="Param_Where_Clause_Like" />
+  </select>
+  <select id="countByQueryCondition" resultType="java.lang.Long">
+    select count(*) from tb_funds
+    <include refid="Param_Where_Clause_Like" />
+  </select>
+  <select id="selectFieldsByParam" parameterType="map" resultMap="BaseResultMap">
+    select
+    <include refid="Param_Column_List" />
+    from tb_funds
+    <include refid="Model_Where_Clause" />
+  </select>
+  <select id="queryFieldsByParam" parameterType="map" resultMap="BaseResultMap">
+    select
+    <include refid="Param_Column_List" />
+    from tb_funds
+    <include refid="Model_Query_Clause" />
+  </select>
+  <select id="selectFieldsByCondition" resultMap="BaseResultMap">
+    select
+    <include refid="Param_Column_List" />
+    from tb_funds
+    <include refid="Param_Where_Clause_Equal" />
+  </select>
+  <select id="queryFieldsByCondition" resultMap="BaseResultMap">
+    select
+    <include refid="Param_Column_List" />
+    from tb_funds
+    <include refid="Param_Where_Clause_Like" />
+  </select>
+  <select id="selectBySql" resultMap="BaseResultMap" statementType="STATEMENT">
+    select
+    <include refid="Base_Column_List" />
+    from tb_funds
+    <include refid="Param_Where_Clause_Sql" />
+  </select>
+  <select id="selectFieldsBySql" resultMap="BaseResultMap" statementType="STATEMENT">
+    select
+    <include refid="Param_Column_List" />
+    from tb_funds
+    <include refid="Param_Where_Clause_Sql" />
+  </select>
+</mapper>

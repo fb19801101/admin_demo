@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+				http://www.springframework.org/schema/beans/spring-beans.xsd
+				http://www.springframework.org/schema/context
+				http://www.springframework.org/schema/context/spring-context.xsd
+				http://www.springframework.org/schema/tx
+				http://www.springframework.org/schema/tx/spring-tx.xsd
+				http://www.springframework.org/schema/aop
+				http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<!-- 开启注解配置 -->
+	<context:annotation-config />
+
+	<!-- 扫描service,base-package 注解所在的包根据自己的需要划分注解类使用的范围  -->
+	<context:component-scan base-package="com.service.impl" use-default-filters="false">
+		<!-- 过滤 Service 的注解 -->
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
+		<!-- 去除 Controller 的注解 -->
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+	</context:component-scan>
+
+	<!-- 事务管理 -->
+	<bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="multipleDataSource"></property>
+	</bean>
+	<!-- 使用声明式事务 -->
+	<tx:annotation-driven transaction-manager="txManager" />
+
+	<!-- 指定什么方法开始事务 attributes下面指定什么样的方法注入事务  -->
+	<tx:advice id="txAdvice" transaction-manager="txManager">
+		<tx:attributes>
+			<tx:method name="insert*" propagation="REQUIRED"/>
+			<tx:method name="delete*" propagation="REQUIRED"/>
+			<tx:method name="update*" propagation="REQUIRED"/>
+			<tx:method name="modify*" propagation="REQUIRED"/>
+			<tx:method name="clear*" propagation="REQUIRED"/>
+			<tx:method name="reg*" propagation="REQUIRED"/>
+			<tx:method name="add*" propagation="REQUIRED"/>
+			<tx:method name="del*" propagation="REQUIRED"/>
+			<tx:method name="set*" propagation="REQUIRED"/>
+			<tx:method name="*" propagation="REQUIRED" read-only="true" />
+		</tx:attributes>
+	</tx:advice>
+
+	<!-- 开启注解Aop -->
+	<aop:aspectj-autoproxy/>
+
+	<!--通知spring使用cglib而不是jdk的来生成代理方法 AOP可以拦截到Controller-->
+	<aop:aspectj-autoproxy proxy-target-class="true" expose-proxy="true"/>
+
+	<!-- 配置数据库注解aop -->
+	<bean id="dataSourceAspect" class="com.daoutil.DataSourceAspect" />
+	<bean id="systemLogAspect" class="com.daoutil.SystemLoggerAspect"></bean>
+
+	<!-- 进行aop切面的配置 -->
+	<aop:config>
+		<!--
+            切割点：pointcut
+			第一个*:任意返回值
+			第二个*:类名(任意类)
+			前面的两个句点表示当前包和当前包的所有子包
+			第三个*:方法名(任意方法)
+			(..):0-n参数,类型任意
+         -->
+		<!-- 声明切入点 -->
+		<aop:pointcut id="pointCut" expression="execution(* com.service.impl.*.*(..))" />
+		<!--切割注入事物 ,植入事务：advisor -->
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="pointCut"/>
+		<!-- 动态数据源切割 -->
+		<aop:aspect id="dynamicAspect" ref="dataSourceAspect" order="0">
+			<aop:before pointcut-ref="pointCut" method="beforeSwitchDataSource"/>
+			<aop:after pointcut-ref="pointCut" method="afterSwitchDataSource"/>
+		</aop:aspect>
+	</aop:config>
+</beans>
